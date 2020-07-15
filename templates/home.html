@@ -1,0 +1,256 @@
+{% extends 'basic.html'%}
+
+{%block title%}YT Downloader {% endblock %}
+
+{% block css  %}
+
+.fieldshead >  a{
+font-size: xx-large;
+}
+.container{
+width:60%;
+align-self:center;
+}
+.highlighttitle{
+width:30%;
+height:30px;
+text-align: center;
+font-size: large;
+
+}
+.highlightcontent{
+height: 30px;
+text-align:center;
+font-size:large;
+
+}
+#Title{
+
+width: 500px;
+}
+#Views{
+width:25%;
+}
+#Duration{
+width:25%;
+}
+.hiddenfields{
+display:none;
+}
+.mainsubmit{
+display:none;
+}
+#symbol1{
+display:none;
+margin-top:5px;
+margin:left:30%
+}
+#loadingbar{
+display:none;
+}
+.loadinghead{
+display:none;
+}
+#confirmation,#confirmationdownload{
+display:none;
+color:red;
+}
+
+{% endblock %}
+
+{% block body %} {% load static%}
+<body class="text-center bg-dark" data-gr-c-s-loaded="true">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand text-white"  >Youtube Downloader</h3>
+          <nav class="nav nav-masthead justify-content-center fieldshead">
+            <a class="nav-link active font-weight-bolder " href="{%url 'home'%}">Home</a>
+            <a class="nav-link font-weight-bolder" href="{%url 'contact'%}">Contact</a>
+          </nav>
+        </div>
+    </header>
+
+    <div class="container my-5 mx-5">
+        <form id="dataform" method="post" action="#"> {% csrf_token%}
+            <input type="hidden" name="dict" id="Submit1"></input>
+            <div class="form-group">
+                <label class="text-white font-weight-bolder" for="Urllink" >Enter the URL of Youtube Video to Download</label>
+                <input type="url" class="form-control" id="Urllink" name="urllink" placeholder="<URL>" required="true" >
+                <small id="urlhelp" class="form-text  text-white">Please enter correct complete URL of exact video.</small>
+
+            </div>
+            <button type="submit" class="btn btn-primary innersubmit" id="Submit" name="Submit1" >Submit</button>
+        </form>
+
+        <div id="symbol1">
+            <div class="spinner-grow text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-info" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-light" role="status" >
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <div class="hiddenfields">
+            <span class="badge badge-pill badge-light highlighttitle" >Details of Video:</span>
+            <br><br>
+                <div class="ele">
+                <p class="text-white font-weight-bolder" for="Title" >Title :
+                    <span class="badge badge-pill badge-success highlightcontent" id="Title"  >Title</span></div>
+                </p>
+
+                <p class="text-white font-weight-bolder" for="Title"  >Views
+                    <span class="badge badge-pill badge-warning highlightcontent" id="Views" >Views</span>
+                </p>
+
+                <p class="text-white font-weight-bolder" for="Title" >Duration
+                    <span class="badge badge-pill badge-secondary highlightcontent" id="Duration" >Duration</span>
+                </p>
+                <br>
+        <form id="dataform2" method="Post" action="#"> {%csrf_token%}
+            <input type="hidden" name="videourl" id="videourl"></input>
+            <input type="hidden" name="dict" id="dict"></input>
+                <div class="downloadpath" id="downloadpathhead">
+                    <label class="text-white font-weight-bolder" for="Downloadpath" >Enter the Download path:</label>
+                    <input type="text" class="form-control" id="Downloadpath" name="Downloadpath" placeholder="<Path>"  >
+                    <small  class="form-text  text-white">Keeping it blank will download it at default system download's location</small>
+                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Enter the Resolution</label>
+                          <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="selectreso" required="true">
+                             <!-- <option selected>Choose...</option>
+                              <option value="1">One</option> -->
+
+                          </select>
+                </div>
+            <button type="submit" class="btn btn-primary mainsubmit" name="Submit2" >Download</button>
+        </form>
+        </div>
+
+         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" id="loadingbar">
+
+             <div class="container my-5 mx-5 loadinghead">
+                    <p class="text-white">Download in Progress.</p>
+                    <div class="spinner-grow text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-secondary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-success" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-danger" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-warning" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-light" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-dark" role="status">
+                      <span class="sr-only">Loading...</span>
+                        </div>
+
+
+              </div>
+         </div>
+            <h3  id="confirmationdownload" class="bg-light my-3">Please Wait! Download in Progress..</h3>
+            <h3  id="confirmation" class="bg-light my-3">Hurray! Download Complete.</h3>
+
+
+    </div>
+    </div>
+</body>
+
+{% endblock %}
+
+{% block js %}
+<script>
+
+
+    $('#dataform').submit(function(event){
+    event.preventDefault();
+    $('#symbol1').show();
+
+    var formdata={
+        'urllink':$('input[name=urllink]').val(),
+        'Submit1':'True',
+        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
+    };
+    $.ajax({
+    type:"POST",
+    url:'',
+    data:formdata,
+    encode:true
+    })
+
+    .done(function (data){
+       data=JSON.parse(data);
+       document.getElementById('Title').innerHTML=data.title;
+       document.getElementById('Views').innerHTML=data.views;
+       document.getElementById('Duration').innerHTML=data.duration;
+       localStorage.clear();
+
+        var appnd='';
+       for (var key in data.dict){
+            appnd+='<option class="selectres" name="selectres" value='+data.dict[key]+'>'+data.dict[key]+'</option>'
+        }
+        document.getElementById('inlineFormCustomSelectPref').innerHTML=appnd
+        $('#dict').val(JSON.stringify(data.dict));
+        $('#symbol1').hide();
+        $('.hiddenfields').show();
+        $('.innersubmit').hide();
+        $('.mainsubmit').show();
+        $('#videourl').val($('#Urllink').val());
+
+    })
+
+
+    })
+ $('#dataform2').submit(function(event){
+    event.preventDefault();
+    $('#loadinghead').show();
+    $('#dataform2').hide();
+    $('#confirmationdownload').show();
+
+    var formdata={
+        'Downloadpath':$('input[name=Downloadpath]').val(),
+        'videourl':$('#Urllink').val(),
+        'selectreso':$('select[name=selectreso]').val(),
+        'dict':$('input[name=dict]').val(),
+        'Submit2':'True',
+        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
+    };
+    $.ajax({
+    type:"POST",
+    url:'',
+    data:formdata,
+    encode:true
+    })
+
+    .done(function (data){
+    data=JSON.parse(data);
+    $('#loadingbar').hide();
+    if (data.think=true){
+        $('#loadinghead').hide();
+        $('#confirmationdownload').hide();
+        $('#confirmation').show();
+   }
+
+    })
+
+
+    })
+
+
+
+</script>
+
+{% endblock %}

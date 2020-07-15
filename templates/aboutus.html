@@ -1,0 +1,43 @@
+{% extends 'basic.html'%}
+ {%  block title %}YT DOwnloader-Contact{% endblock %}
+{% block css %} 
+.container{
+    height: 30em;
+}
+body{
+        background-color: black;
+      }
+
+{% endblock  %}
+{% block body%}
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand text-light" style="text-align: center;" >Youtube Downloader</h3>
+          <nav class="nav nav-masthead justify-content-center fieldshead">
+            <a class="nav-link active font-weight-bolder text-primary " href="{%url 'home'%}">Home</a>
+            <a class="nav-link font-weight-bolder text-primary" href="{%url 'contact'%}">Contact</a>
+          </nav>
+        </div>
+    </header>
+</div>
+<div class="container mt-5">
+    <div class="row" style="height: inherit;">
+        
+    
+        <div class="col-md-8 h-100 bg-danger division ">
+            <p class="pt-3">&nbsp; &nbsp;&nbsp;</p><p><span style="color: rgb(8, 9, 10); font-family: Palatino, &quot;Palatino Linotype&quot;, &quot;Palatino LT STD&quot;, &quot;Book Antiqua&quot;, Georgia, serif; font-size: 20px; ">Hi, am Sandeep&nbsp; from Jammu, J&amp;K and I work in Pune. I am having 4.5 years of work experience in IT with python development and test automation.&nbsp; I have a motto in life<em> Live to Learn &amp; Learn to Code</em>, and I am truly enjoying it.&nbsp; I would like you all to adopt this motto in your life.&nbsp;</span><br data-mce-bogus="1"></p><p><span style="color: rgb(8, 9, 10); font-family: Palatino, &quot;Palatino Linotype&quot;, &quot;Palatino LT STD&quot;, &quot;Book Antiqua&quot;, Georgia, serif; font-size: 20px; ">When you enter in IT field its a matter of luck which field you get in. I got into software testing, but I have always been crazy for languages. Slowly and slowly by understanding the basics of product development, I moved to test automation and now am here developing web apps. I would like you also to keep trying, even if you loose you will learn something. :-)&nbsp;</span></p><p><span style="color: rgb(8, 9, 10); font-family: Palatino, &quot;Palatino Linotype&quot;, &quot;Palatino LT STD&quot;, &quot;Book Antiqua&quot;, Georgia, serif; font-size: 20px; ;">Please feel free to contact me through channels in footer.</span></p>
+
+        </div>
+        <div class="col-md-4 h-100 pt-5 bg-danger division">
+            <img src="/static/myimage2.jpg" alt="Error loading image" style="width: inherit; height: 95%;">
+        </div>
+</div>
+
+</div>
+
+
+
+
+
+{% endblock  %}
