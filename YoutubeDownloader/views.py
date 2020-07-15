@@ -11,45 +11,36 @@ def index(request):
     if request.method=="POST" and 'Submit1' in request.POST:
         print("Entered Submit1")
         link=request.POST.get('urllink','')
+        link=repr(link)
         video=YouTube(link)
         title=video.title
         duration=video.length
         duration=str(datetime.timedelta(seconds = duration))
         views=video.views
-        print(title,views,duration)
         vs=video.streams.filter(progressive="True")
         vs=str(vs)
         listgen = vs.split("Stream:")
-        #dict={}
         global dict
-        print(len(listgen))
         for x in listgen[1:]:
             res=findres(x)
             tag=findtag(x)
             dict[tag]=res
-        print("DICT is: ",dict)
         param={'link':link,'title':title,'duration':duration,'views':views,'dict':dict}
         return HttpResponse(json.dumps(param))
     elif  request.method=="POST" and 'Submit2' in request.POST:
         print("Entered SUbmit 2")
         url = request.POST.get('videourl', '')
-        print("url is :", url)
         path = request.POST.get('Downloadpath', '')
         res = request.POST.get('selectreso', '')
-        print("RESOLUTION :",res)
-        #dict = request.POST.get('dict', '')
-        print("dict is :",dict)
-        #innerdict = json.loads(dict)
         key_list = list(dict.keys())
         val_list = list(dict.values())
         itag = key_list[val_list.index(res)]
-        print(itag)
         video = YouTube(url)
         time.sleep(2)
-        # if path=="":
-        #     video.streams.get_by_itag(itag).download(path)
-        # else:
-        #     video.streams.get_by_itag(itag).download(path)
+        if path=="":
+            video.streams.get_by_itag(itag).download(path)
+        else:
+            video.streams.get_by_itag(itag).download(path)
         return HttpResponse(json.dumps({'thank': True}))
     else:
         return render(request,'home.html')
